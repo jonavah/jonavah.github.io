@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Lima - Chorrillos</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .arrow-button {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            background-color: #c9e4ca;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 2; /* Asegúrate de que la flecha esté en una capa superior que el menú */
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -25%;
+            height: 100vh;
+            width: 25%;
+            background-color: #c9e4ca;
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+            padding: 20px;
+            transition: left 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: black;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .menu.show {
+            left: 0;
+        }
+
+        .menu img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+        }
+
+        .offer img,
+        .rating img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="arrow-button">&larr;</button>
+
+    <div class="menu">
+        <a href="index.html">
+            <img src="imagenes/logo.png" alt="Logo de CORPCOMMUNITY" style="width: 80px; height: 80px;">
+        </a>
+        <p>CORPCOMMUNITY</p>
+        <input type="text" placeholder="Escribe aquí...">
+        <p>Bodega Surco</p>
+        <img src="imagenes/whatsapp.png" alt="WhatsApp">
+        <p>WhatsApp</p>
+        <img src="imagenes/instagram.png" alt="Instagram">
+        <p>Instagram</p>
+        <img src="imagenes/telefono.png" alt="Telefono">
+        <p>Telefono</p>
+        <div class="offer">
+            <img src="imagenes/mas.png" alt="Oferta">
+            <p>Ofertas del dia</p>
+        </div>
+        <div class="offer">
+            <img src="imagenes/mas.png" alt="Oferta">
+            <p>Productos</p>
+        </div>
+        <div class="offer">
+            <img src="imagenes/mas.png" alt="Oferta">
+            <p>Añadir mas...</p>
+        </div>
+        <div class="rating">
+            <img src="imagenes/star_on.png" alt="Estrella encendida">
+            <img src="imagenes/star_on.png" alt="Estrella encendida">
+            <img src="imagenes/star_off.png" alt="Estrella apagada">
+            <img src="imagenes/star_off.png" alt="Estrella apagada">
+            <img src="imagenes/star_off.png" alt="Estrella apagada">
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+        const arrowButton = document.querySelector('.arrow-button');
+        const menu = document.querySelector('.menu');
+
+        arrowButton.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+    </script>
+
+    <script>
+        function initMap() {
+            var chorrillosLatLng = { lat: -12.1792, lng: -77.0126 }; // Coordenadas de Chorrillos, Lima
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14, // Nivel de zoom
+                center: chorrillosLatLng // Centro del mapa (Chorrillos, Lima)
+            });
+
+            var marker = new google.maps.Marker({
+                position: chorrillosLatLng,
+                map: map,
+                title: 'Chorrillos, Lima' // Texto que aparecerá al hacer clic en el marcador
+            });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKUc3Y80ayJrhK9O11BKSuUyq9wTax4Ko&callback=initMap" async defer></script>
+</body>
+
+</html>
